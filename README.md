@@ -56,6 +56,26 @@ finalize for -> &{123 abc}
 after: &{123 abc}
 ```
 
+大量にappendする
+
+```sh
+❯ go run main.go
+before: &{123 abc}
+finalize for -> &{123 abc}
+after: &{59314 dummy}
+```
+
+`go vet`してみる
+
+```sh
+❯ go vet main.go
+# command-line-arguments
+./main.go:45:8: possible misuse of unsafe.Pointer
+```
+
+指摘されたのは`xp := unsafe.Pointer(uintptr(xip))`の箇所
+
+
 ## References
 - [GCに思いを馳せてunsafeなコードを書く \- Qiita](https://qiita.com/taxio/items/b49629d3f44f1c933f6d)
 - [CompilerOptimizations · golang/go Wiki](https://github.com/golang/go/wiki/CompilerOptimizations#escape-analysis)

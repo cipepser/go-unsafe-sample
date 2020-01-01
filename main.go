@@ -36,6 +36,12 @@ func finalizer(x *X) {
 func main() {
 	xip := newXAsIntPtr()
 	runtime.GC()
+
+	var xs []*X
+	for i := 0; i < 10000000; i++ {
+		xs = append(xs, &X{A: i, B: "dummy"})
+	}
+
 	xp := unsafe.Pointer(uintptr(xip))
 	x := (*X)(xp)
 	fmt.Printf("after: %v\n", x)

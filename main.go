@@ -17,6 +17,7 @@ func NewX() *X {
 		B: "abc",
 	}
 	fmt.Printf("before: %v\n", x)
+	runtime.SetFinalizer(x, finalizer)
 	return x
 }
 
@@ -25,6 +26,11 @@ func newXAsIntPtr() int {
 	xp := unsafe.Pointer(x)
 	xup := uintptr(xp)
 	return int(xup)
+}
+
+func finalizer(x *X) {
+	fmt.Printf("finalize for -> %v\n", x)
+	return
 }
 
 func main() {

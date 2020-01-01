@@ -47,6 +47,15 @@ after: &{123 abc}
 ./main.go:35:13: x escapes to heap
 ```
 
+finalizerを追加した結果
+
+```sh
+❯ go run main.go
+before: &{123 abc}
+finalize for -> &{123 abc}
+after: &{123 abc}
+```
+
 ## References
 - [GCに思いを馳せてunsafeなコードを書く \- Qiita](https://qiita.com/taxio/items/b49629d3f44f1c933f6d)
 - [CompilerOptimizations · golang/go Wiki](https://github.com/golang/go/wiki/CompilerOptimizations#escape-analysis)
